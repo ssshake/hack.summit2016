@@ -154,6 +154,34 @@ htmlcommand{
     ),url('../images/pixeltexture.png') repeat;
     box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
 }
+
+.bg {
+    background: linear-gradient(
+        rgba(215, 102, 54, 0.5),
+        rgba(215, 102, 54, 0.5)
+    ),url('../images/pixeltexture.png') repeat;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.7);
+}
+
+.help-window{
+    top:0px;
+    right:10px;
+    opacity:1;
+    color:black;
+   overflow-wrap: break-word;
+   word-wrap: break-word;
+   font-size:12pt;
+   background-color:white;
+   border: 6px solid;
+   padding:10px;
+   text-align:left;
+   /*font-family:arial;*/
+   font-family:nokia;
+   font-smooth:never;
+   border: #000000 solid 6px;
+}
+
+
 .wallright {
     color:black;
     width:5em;

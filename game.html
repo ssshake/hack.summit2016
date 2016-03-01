@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <!-- For firefox! -->
+        <script src='js/webcomponentsjs/webcomponents.js'></script>
+
+        <title>Super Markup World</title>
+
+        <meta charset='utf-8'>
+
+        <!-- CSS files -->
+        <link href='css/actors.css' rel='stylesheet'>
+        <link href='css/main.css' rel='stylesheet'>
+        <link href='css/term.css' rel='stylesheet'>
+        <link href='terminal/css/jquery.terminal.css' rel='stylesheet'>
+
+        <!-- Levels -->
+        <link rel='import' href='levels/level0.html'>
+        <link rel='import' href='levels/level1.html'>
+        <link rel='import' href='levels/level2.html'>
+        <link rel='import' href='levels/level3.html'>
+        <link rel='import' href='levels/level4.html'>
+        <link rel='import' href='levels/level5.html'>
+        <link rel='import' href='levels/level6.html'>
+
+        <!-- Javascripts -->
+        <script src='js/jquery-1.12.0.min.js'></script>
+        <script src='js/jquery-collision.min.js'></script>
+        <script src='js/watchjs/src/watch.min.js'></script>
+        <script>
+            // Globals.
+            var guy, playable = false,
+                stats = {
+                    level: null
+                },
+				story = [
+					'Pixel and Pixella live in the Super Markup World<br>which was created by the great architect Markup Polo.',
+					'On a beautiful sunny day when Pixel and Pixella visited<br>the mountainous region of Divland ...',
+					'... the evil architect Badacss has collapsed all the mountains!<br>Pixella somehow evaded the disaster using a hyperlink tag.',
+					'But now Pixel and Pixella are separated!',
+					'It is up to you, Pixel, to find Pixella and destroy badacss.'
+				];
+            $(function () {
+                guy = $('#guy');
+            });
+        </script>
+        <script src='js/input.js'></script>
+        <script src='js/game.js'></script>
+        <script src='js/engine.js'></script>
+        <!-- <script src='js/term.js'></script>
+        <script src='/terminal/js/jquery.mousewheel-min.js'></script>
+        <script src='/terminal/js/code.js'></script>
+        <script src='/terminal/js/jquery.terminal-min.js'></script>
+        <script src='/terminal/js/unix_formatting.js'></script>
+        <link href='/terminal/css/jquery.terminal.css' rel='stylesheet'/> -->
+        <!-- <link href='/css/term.css' rel='stylesheet'/> -->
+    </head>
+    <body>
+
+		<div id='story'>
+			<h1>
+				<span class='blue'>S</span><span class='red'>u</span><span class='yellow'>p</span><span class='green'>e</span><span class='blue'>r </span> <span class='red'>M</span><span class='green'>a</span><span class='yellow'>r</span><span class='red'>k</span><span class='blue'>u</span><span class='green'>p</span> <span class='yellow'>W</span><span class='red'>o</span><span class='blue'>r</span><span class='green'>l</span><span class='yellow'>d</span>
+			</h1>
+			<div id='storyText'></div>
+			<button type='button'>OK</button>
+		</div>
+
+        <div id='endstory'>
+            <h1>You Did It!</h1>
+            <div><img src="images/player_big.gif" style="width:200px;height:200px"><img src="images/friend_big2.gif" style="margin-left:20px;width:200px;height:200px"></div>
+            <div>Congratulations, not only did you save your friend but you also learned some valuable skills along the way.</div>
+            <br><br>
+            <div>Refresh the page to play again!</div>
+        </div>
+
+        <div class='collider' id='guy'>
+            <div class='collider' id='horizontalCollider' style='width: 32px; height: 31px;'></div>
+            <div id="speech-bubble">
+                <div id='speech-bubble-text'></div>
+                <span id='speech-bubble-prev' class='pointer faded'>&lt; prev</span> |
+                <span id='speech-bubble-next' class='pointer'>next &gt;</span>
+                <span id='speech-bubble-close' class='pointer faded right'>X</span>
+            </div>
+        </div>
+
+        <div class='game-window'></div>
+
+    <!-- <div id='terminal'>
+	    <div id='term_demo' style='overflow-y:hidden;'></div>
+    </div> -->
+
+        <div class='game-border'>
+            <div class='obstacle wall wallright'></div>
+            <div class='obstacle wall wallleft'></div>
+            <div class='obstacle deathfield'></div>
+            <!-- <div class='cloudparent'>
+                <div class='cloud' style='left:200px;bottom:350px;'''></div>
+                <div class='cloud' style='left:1000px;bottom:450px;'''></div>
+                <div class='cloud' style='left:1500px;bottom:500px;'''></div>
+            </div> -->
+        </div>
+        <div id='sandbox'></div>
+
+        <div class='command-window'>
+            <div class='command-hint'>HTML Command Window</div>
+            <div class='command-box'>
+                <textarea id='htmlcommand' rows=5  spellcheck="false"> &lt;div style='left:300px;bottom:300px'&gt;&lt;/div&gt;</textarea>
+                <button id='update' class='btn' type='button'>Create</button>
+            </div>
+        </div>
+
+        <!-- audio -->
+        <audio id=add_div>
+            <source src=sounds/add_div.wav volume=".1">
+        </audio>
+        <audio id=jump>
+            <source src=sounds/jump.wav volume="0.1">
+        </audio>
+        <audio id=default>
+            <source src=sounds/default.wav volume=".1">
+        </audio>
+        <audio id=death>
+            <source src=sounds/death.wav volume=".1">
+        </audio>
+        <audio id=next_level>
+            <source src=sounds/next_level.wav volume=".1">
+        </audio>
+        <audio id=thud>
+            <source src=sounds/thud.wav volume=".1">
+        </audio>
+        <audio id=pickup>
+            <source src=sounds/pickup.wav volume=".1">
+        </audio>
+		<!--
+			Free awesome music provided by http://opengameart.org/content/fun-bgm
+		-->
+        <audio loop autoplay id=music preload="auto" volume=1>
+          <source src="sounds/music2.ogg" type="audio/mpeg">
+        </audio>
+         <div id="music-button" class="button-container"><img style="width:48px;height:48px;" src="images/music_note2.gif"></div>
+
+        <div class="tooltip">Tooltip</div>
+    </body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71679599-8', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</html>
