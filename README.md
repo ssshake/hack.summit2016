@@ -4,3 +4,5 @@
 
 # [-> Live Example](http://ssshake.github.io/super-markup-world/index.html)
 
+ ![screenshot](images/splash.png)
+
